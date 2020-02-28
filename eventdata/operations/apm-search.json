@@ -219,9 +219,9 @@
   "window_length": "50%"
 },
 {
-  "name": "scanquery_elasticlogs_i_1m",
+  "name": "query_apm_transactions",
   "operation-type": "search",
-  "index": "elasticlogs_i-*",
+  "index": "apm-*",
   "pages": 10000,
   "results-per-page": 10000,
   "body": {
