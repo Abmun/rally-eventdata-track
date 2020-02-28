@@ -1,237 +1,122 @@
 {
-  "name": "kibana-traffic-shard-sizing-50%",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard":"traffic",
-  "index_pattern": "elasticlogs",
-  "query_string": ["*"],
-  "window_end": "2017-01-01:07:00:00,2017-01-01:12:00:00",
-  "window_length": "5h"
-},
+      "name": "query-transactions-with-time",
+      "operation-type": "search",
+      "index": "apm-*transaction*",
+      "body": {
+        "size": 500,
+        "query": {
+            "bool": {
+                "filter": [
+                    {
+                        "term": {
+                            "processor.event": "transaction"
+                        }
+                    },
+                    {
+                        "range": {
+                            "@timestamp": {
+                                "gte": "now-2d/d",
+                                "lte": "now/d",
+                                "format": "epoch_millis"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "sort": [
+            {
+                "transaction.duration.us": {
+                    "order": "asc"
+                }
+            }
+        ]
+      }
+    },
 {
-  "name": "kibana-traffic-shard-sizing-90%",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard":"traffic",
-  "index_pattern": "elasticlogs",
-  "query_string": ["*"],
-  "window_end": "2017-01-01:11:00:00,2017-01-01:12:00:00",
-  "window_length": "5h"
-},
-{
-  "name": "kibana-content_issues-shard-sizing-50%",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard": "content_issues",
-  "index_pattern": "elasticlogs",
-  "query_string": ["*"],
-  "window_end": "2017-01-01:07:00:00,2017-01-01:12:00:00",
-  "window_length": "5h"
-},
-{
-  "name": "kibana-content_issues-shard-sizing-90%",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard": "content_issues",
-  "index_pattern": "elasticlogs",
-  "query_string": ["*"],
-  "window_end": "2017-01-01:11:00:00,2017-01-01:12:00:00",
-  "window_length": "9h"
-},
-{
-  "name": "current-kibana-traffic-country-dashboard_60m",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard":"traffic",
-  "index_pattern": "elasticlogs_*",
-  "query_string": "query_string_lists/country_code_query_strings.json",
-  "window_end": "now",
-  "window_length": "60m"
-},
-{
-  "name": "current-kibana-content_issues-country-dashboard_60m",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard": "content_issues",
-  "index_pattern": "elasticlogs_*",
-  "query_string": "query_string_lists/country_code_query_strings.json",
-  "window_end": "now",
-  "window_length": "60m"
-},
-{
-  "name": "current-kibana-traffic-dashboard_30m",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard":"traffic",
-  "index_pattern": "elasticlogs_*",
-  "query_string": ["*"],
-  "window_end": "now",
-  "window_length": "30m"
-},
-{
-  "name": "current-kibana-content_issues-dashboard_30m",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard": "content_issues",
-  "index_pattern": "elasticlogs_*",
-  "query_string": ["*"],
-  "window_end": "now",
-  "window_length": "30m"
-},
-{
-  "name": "current-kibana-traffic-dashboard_15m",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard": "traffic",
-  "index_pattern": "elasticlogs_*",
-  "query_string": ["*"],
-  "window_end": "now",
-  "window_length": "15m"
-},
-{
-  "name": "current-kibana-content_issues-dashboard_15m",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard": "content_issues",
-  "index_pattern": "elasticlogs_*",
-  "query_string": ["*"],
-  "window_end": "now",
-  "window_length": "15m"
-},
-{
-  "name": "relative-kibana-traffic-dashboard_25%",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard": "traffic",
-  "index_pattern": "{{p_query_index_pattern}}",
-  "query_string": "query_string_lists/country_code_query_strings.json",
-  "window_end": "START+25%,END",
-  "window_length": "25%"
-},
-{
-  "name": "relative-kibana-content_issues-dashboard_25%",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard": "content_issues",
-  "index_pattern": "{{p_query_index_pattern}}",
-  "query_string": "query_string_lists/country_code_query_strings.json",
-  "window_end": "START+25%,END",
-  "window_length": "25%"
-},
-{
-  "name": "relative-kibana-traffic-dashboard_50%",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard": "traffic",
-  "index_pattern": "{{p_query_index_pattern}}",
-  "query_string": "query_string_lists/country_code_query_strings.json",
-  "window_end": "START+50%,END",
-  "window_length": "50%"
-},
-{
-  "name": "relative-kibana-content_issues-dashboard_50%",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard": "content_issues",
-  "index_pattern": "{{p_query_index_pattern}}",
-  "query_string": "query_string_lists/country_code_query_strings.json",
-  "window_end": "START+50%,END",
-  "window_length": "50%"
-},
-{
-  "name": "relative-kibana-traffic-dashboard_75%",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard": "traffic",
-  "index_pattern": "{{p_query_index_pattern}}",
-  "query_string": "query_string_lists/country_code_query_strings.json",
-  "window_end": "START+75%,END",
-  "window_length": "75%"
-},
-{
-  "name": "relative-kibana-content_issues-dashboard_75%",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard": "content_issues",
-  "index_pattern": "{{p_query_index_pattern}}",
-  "query_string": "query_string_lists/country_code_query_strings.json",
-  "window_end": "START+75%,END",
-  "window_length": "75%"
-},
-{
-  "name": "current-kibana-discover_30m",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard": "discover",
-  "index_pattern": "{{p_query_index_pattern}}",
-  "query_string": ["*"],
-  "window_end": "now",
-  "window_length": "30m"
-},
-{
-  "name": "relative-kibana-discover_50%",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard": "discover",
-  "index_pattern": "{{p_query_index_pattern}}",
-  "query_string": "query_string_lists/country_code_query_strings.json",
-  "window_end": "START+50%,END",
-  "window_length": "50%"
-},
-{
-  "name": "relative-kibana-discover-ip_filter_50%",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard": "discover",
-  "index_pattern": "{{p_query_index_pattern}}",
-  "query_string": "query_string_lists/uncommon_ip_query_strings.json",
-  "window_end": "START+50%,END",
-  "window_length": "50%"
-},
-{
-  "name": "relative-kibana-discover-country_filter_50%",
-  "operation-type": "kibana",
-  "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
-  "dashboard": "discover",
-  "index_pattern": "{{p_query_index_pattern}}",
-  "query_string": "query_string_lists/country_code_query_strings.json",
-  "window_end": "START+50%,END",
-  "window_length": "50%"
-},
-{
-  "name": "query_apm_transactions",
-  "operation-type": "search",
-  "index": "apm-*",
-  "pages": 10000,
-  "results-per-page": 10000,
-  "body": {
-    "query": {
-      "range" : {
-        "@timestamp" : {
-          "gte" : "now-15m",
-          "lt" :  "now"
+      "name": "query-all-spans",
+      "operation-type": "search",
+      "index": "apm-*span*",
+      "body": {
+        "query": {
+          "match_all": {}
+        }
+      }
+    },
+    {
+      "name": "query-spans-no-time",
+      "operation-type": "search",
+      "index": "apm-*span*",
+      "body": {
+        "size": 500,
+        "query": {
+            "bool": {
+                "filter": [
+                    {
+                        "term": {
+                            "processor.event": "span"
+                        }
+                    }
+                ]
+            }
+        },
+        "sort": [
+            {
+                "span.start.us": {
+                    "order": "asc"
+                }
+            }
+        ],
+        "aggs": {
+            "types": {
+                "terms": {
+                    "field": "span.type",
+                    "size": 100
+                }
+            }
+        }
+      }
+    },
+    {
+      "name": "query-spans-with-time",
+      "operation-type": "search",
+      "index": "apm-*span*",
+      "body": {
+        "size": 500,
+        "query": {
+            "bool": {
+                "filter": [
+                    {
+                        "term": {
+                            "processor.event": "span"
+                        }
+                    },
+                    {
+                        "range": {
+                            "@timestamp": {
+                                "gte": "now-2d/d",
+                                "lte": "now/d",
+                                "format": "epoch_millis"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "sort": [
+            {
+                "span.start.us": {
+                    "order": "asc"
+                }
+            }
+        ],
+        "aggs": {
+            "types": {
+                "terms": {
+                    "field": "span.type",
+                    "size": 100
+                }
+            }
         }
       }
     }
-  }
-}
