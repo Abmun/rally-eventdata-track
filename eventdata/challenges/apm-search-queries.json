@@ -15,7 +15,19 @@
         "clients": 4,
         "tasks": [
           {
-            "operation": "query_apm_transactions",
+            "operation": "query-transactions-with-time",
+            "target-interval": 30
+          },
+            {
+            "operation": "query-all-spans",
+            "target-interval": 30
+          },
+            {
+            "operation": "query-spans-no-time",
+            "target-interval": 30
+          },
+            {
+            "operation": "query-spans-with-time",
             "target-interval": 30
           }
         ]
