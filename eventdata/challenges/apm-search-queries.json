@@ -16,19 +16,27 @@
         "tasks": [
           {
             "operation": "query-transactions-with-time",
-            "target-interval": 30
+            "target-interval": 15
           },
             {
             "operation": "query-all-spans",
-            "target-interval": 30
+            "target-interval": 15
           },
             {
             "operation": "query-spans-no-time",
-            "target-interval": 30
+            "target-interval": 15
           },
             {
             "operation": "query-spans-with-time",
-            "target-interval": 30
+            "target-interval": 15
+          },
+          {
+            "operation": "query-spans-by-service-timewindow",
+            "target-interval": 15
+          },
+          {
+            "operation": "query-error-timewindow",
+            "target-interval": 15
           }
         ]
       }
