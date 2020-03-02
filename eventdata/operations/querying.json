@@ -119,4 +119,75 @@
             }
         }
       }
+    },
+     {
+      "name": "query-spans-by-service-timewindow",
+      "operation-type": "search",
+      "index": "apm-*span*",
+      "body": {
+        "size": 500,
+        "query": {
+            "bool": {
+                "filter": [
+                    {
+                        "term": {
+                            "processor.event": "bizx-cf-web"
+                        }
+                    },
+                    {
+                        "range": {
+                            "@timestamp": {
+                                "gte": "now-10d/d",
+                                "lte": "now/d",
+                                "format": "epoch_millis"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "sort": [
+            {
+                "span.start.us": {
+                    "order": "asc"
+                }
+            }
+        ],
+        "aggs": {
+            "types": {
+                "terms": {
+                    "field": "span.type",
+                    "size": 100
+                }
+            }
+        }
+      }
+    },
+{
+      "name": "query-error-timewindow",
+      "operation-type": "search",
+      "index": "apm-*error*",
+      "body": {
+        "size": 500,
+        "query": {
+            "bool": {
+                "filter": [
+                    {
+                        "term": {
+                            "processor.event": "error"
+                        }
+                    },
+                    {
+                        "range": {
+                            "@timestamp": {
+                                "gte": "now-3d/d",
+                                "lte": "now/d",
+                                "format": "epoch_millis"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+      }
     }
