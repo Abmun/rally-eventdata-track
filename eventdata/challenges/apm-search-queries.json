@@ -20,7 +20,7 @@
         "tasks": [
           {
             "operation": "query-transactions-with-time",
-            "target-interval": 15
+            "target-interval": 30
           },
             {
             "operation": "query-all-spans",
@@ -28,7 +28,7 @@
           },
             {
             "operation": "query-spans-no-time",
-            "target-interval": 15
+            "target-interval": 30
           },
             {
             "operation": "query-spans-with-time",
@@ -40,15 +40,15 @@
           },
           {
             "operation": "query-error-timewindow",
-            "target-interval": 15
+            "target-interval": 30
           },
           {
             "operation": "current-kibana-transactions-discover_120m",
-            "target-interval": 60
+            "target-interval": 90
           },
           {
             "operation": "current-kibana-spans-discover_120m",
-            "target-interval": 60
+            "target-interval": 90
           },
           {
             "operation": "current-kibana-transactions-discover_60m",
