@@ -220,6 +220,17 @@
       }
     },
 {
+  "name": "current-kibana-discover_60m",
+  "operation-type": "kibana",
+  "param-source": "elasticlogs_kibana",
+  "debug": {{p_verbose}},
+  "dashboard": "discover",
+  "index_pattern": "apm-*",
+  "query_string": ["*"],
+  "window_end": "now",
+  "window_length": "60m"
+},
+{
       "name": "check-cluster-health",
       "operation-type": "cluster-health",
       "index": "apm-*",
