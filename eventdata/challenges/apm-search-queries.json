@@ -12,7 +12,7 @@
       "parallel": {
         "warmup-time-period": 0,
         "time-period": {{ p_query_time_period }},
-        "clients": 9,
+        "clients": 8,
         "tasks": [
           {
             "operation": "query-transactions-with-time",
@@ -40,10 +40,6 @@
           },
           {
             "operation": "current-kibana-transactions-discover_120m",
-            "target-interval": 90
-          },
-          {
-            "operation": "current-kibana-spans-discover_120m",
             "target-interval": 60
           },
           {
