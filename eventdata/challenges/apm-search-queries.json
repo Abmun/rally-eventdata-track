@@ -9,10 +9,6 @@
   },
   "schedule": [
     {
-          "name": "check-cluster-health",
-          "operation": "check-cluster-health"
-    },
-    {
       "parallel": {
         "warmup-time-period": 0,
         "time-period": {{ p_query_time_period }},
