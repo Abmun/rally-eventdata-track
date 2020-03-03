@@ -9,34 +9,38 @@
   },
   "schedule": [
     {
+          "name": "check-cluster-health",
+          "operation": "check-cluster-health"
+    },
+    {
       "parallel": {
         "warmup-time-period": 0,
         "time-period": {{ p_query_time_period }},
-        "clients": 6,
+        "clients": 10,
         "tasks": [
           {
             "operation": "query-transactions-with-time",
-            "target-interval": 15
+            "target-interval": 10
           },
             {
             "operation": "query-all-spans",
-            "target-interval": 15
+            "target-interval": 10
           },
             {
             "operation": "query-spans-no-time",
-            "target-interval": 15
+            "target-interval": 10
           },
             {
             "operation": "query-spans-with-time",
-            "target-interval": 15
+            "target-interval": 10
           },
           {
             "operation": "query-spans-by-service-timewindow",
-            "target-interval": 15
+            "target-interval": 10
           },
           {
             "operation": "query-error-timewindow",
-            "target-interval": 15
+            "target-interval": 10
           }
         ]
       }
