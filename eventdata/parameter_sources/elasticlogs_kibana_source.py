@@ -29,7 +29,7 @@ import time
 
 logger = logging.getLogger("track.eventdata")
 
-available_dashboards = ["traffic", "content_issues", "discover"]
+available_dashboards = ["traffic", "content_issues", "discover","jmx"]
 
 epoch = datetime.datetime.utcfromtimestamp(0)
 
@@ -55,7 +55,7 @@ class ElasticlogsKibanaSource:
     Simulates a set of sample Kibana dashboards for the elasticlogs data set.
 
     It expects the parameter hash to contain the following keys:
-        "dashboard"             -   String indicating which dashboard to simulate. Options are 'traffic', 'content_issues' and 'discover'.
+        "dashboard"             -   String indicating which dashboard to simulate. Options are 'traffic', 'content_issues','discover' and 'jmx'.
         "query_string"          -   String indicating file to load or list of strings indicating actual query parameters to randomize during benchmarking. Defaults 
                                     to ["*"], If a list has been specified, a random value will be selected.
         "index_pattern"         -   String or list of strings representing the index pattern to query. If a list has
@@ -195,7 +195,9 @@ class ElasticlogsKibanaSource:
             response = {"body": self.__content_issues_dashboard(index_pattern, query_string, interval, ts_min_ms, ts_max_ms, self._ignore_throttled)}
         elif self._dashboard == "discover":
             response = {"body": self.__discover(self._discover_size, index_pattern, query_string, interval, ts_min_ms, ts_max_ms, self._ignore_throttled)}
-
+        elif self._dashboard == "jmx":
+            response = {"body": self.__jmx_dashboard(index_pattern, query_string, interval, ts_min_ms, ts_max_ms, self._ignore_throttled)}
+            
         response["meta_data"] = meta_data
 
         return response
@@ -386,7 +388,19 @@ class ElasticlogsKibanaSource:
                    header,
                    {"size":0,"aggs":{"2":{"date_histogram":{"field":"@timestamp","fixed_interval":interval,"time_zone":"Europe/London","min_doc_count":1},"aggs":{"3":{"terms":{"field":"nginx.access.response_code","size":10,"order":{"_count":"desc"}}}}}},"version":True,"_source":{"excludes":[]},"stored_fields":["*"],"script_fields":{},"docvalue_fields":["@timestamp"],"query":{"bool":{"must":[{"match_all":{}},{"query_string":{"query":"nginx.access.response_code: [400 TO 600]","analyze_wildcard":True,"default_field":"*"}},{"query_string":{"query":query_string,"analyze_wildcard":True,"default_field":"*"}},{"range":{"@timestamp":{"gte":ts_min_ms,"lte":ts_max_ms,"format":"epoch_millis"}}}],"filter":[],"should":[],"must_not":[]}},"highlight":{"pre_tags":["@kibana-highlighted-field@"],"post_tags":["@/kibana-highlighted-field@"],"fields":{"*":{}},"fragment_size":2147483647}}
                ]
+    
+    def __jmx_dashboard(self, index_pattern, query_string, interval, ts_min_ms, ts_max_ms, ignore_throttled):
+        preference = self.__get_preference()
+        header = {
+            "index": index_pattern,
+            "ignore_unavailable": True,
+            "preference": preference,
+            "ignore_throttled": ignore_throttled
 
+        }
+        return [
+                ]
+    
     def __discover(self, discover_size, index_pattern, query_string, interval, ts_min_ms, ts_max_ms, ignore_throttled):
         preference = self.__get_preference()
         header = {
