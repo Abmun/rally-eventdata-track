@@ -192,6 +192,34 @@
       }
     },
 {
+      "name": "query-transactiontype-timewindow",
+      "operation-type": "search",
+      "index": "apm-*transaction*",
+      "body": {
+        "size": 500,
+        "query": {
+            "bool": {
+                "filter": [
+                    {
+                        "term": {
+                            "transaction.type": "request"
+                        }
+                    },
+                    {
+                        "range": {
+                            "@timestamp": {
+                                "gte": "now-5d/d",
+                                "lte": "now/d",
+                                "format": "epoch_millis"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+      }
+    },
+{
       "name": "check-cluster-health",
       "operation-type": "cluster-health",
       "index": "apm-*",
