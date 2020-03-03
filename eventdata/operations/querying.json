@@ -220,15 +220,48 @@
       }
     },
 {
-  "name": "current-kibana-discover_120m",
+  "name": "current-kibana-transactions-discover_120m",
   "operation-type": "kibana",
   "param-source": "elasticlogs_kibana",
   "debug": false,
   "dashboard": "discover",
-  "index_pattern": "apm-*",
+  "index_pattern": "apm-*transaction*",
   "query_string": ["*"],
   "window_end": "now",
   "window_length": "120m"
+},
+{
+  "name": "current-kibana-spans-discover_120m",
+  "operation-type": "kibana",
+  "param-source": "elasticlogs_kibana",
+  "debug": false,
+  "dashboard": "discover",
+  "index_pattern": "apm-*span*",
+  "query_string": ["*"],
+  "window_end": "now",
+  "window_length": "120m"
+},
+{
+  "name": "current-kibana-transactions-discover_60m",
+  "operation-type": "kibana",
+  "param-source": "elasticlogs_kibana",
+  "debug": false,
+  "dashboard": "discover",
+  "index_pattern": "apm-*transaction*",
+  "query_string": ["*"],
+  "window_end": "now",
+  "window_length": "60m"
+},
+{
+  "name": "current-kibana-spans-discover_60m",
+  "operation-type": "kibana",
+  "param-source": "elasticlogs_kibana",
+  "debug": false,
+  "dashboard": "discover",
+  "index_pattern": "apm-*span*",
+  "query_string": ["*"],
+  "window_end": "now",
+  "window_length": "60m"
 },
 {
       "name": "check-cluster-health",
