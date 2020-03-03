@@ -48,14 +48,6 @@
           },
           {
             "operation": "current-kibana-spans-discover_120m",
-            "target-interval": 90
-          },
-          {
-            "operation": "current-kibana-transactions-discover_60m",
-            "target-interval": 60
-          },
-          {
-            "operation": "current-kibana-spans-discover_60m",
             "target-interval": 60
           },
           {
