@@ -190,4 +190,13 @@
             }
         }
       }
+    },
+{
+      "name": "check-cluster-health",
+      "operation-type": "cluster-health",
+      "index": "apm-*",
+      "request-params": {
+        "wait_for_status": "{{cluster_health | default('yellow')}}",
+        "wait_for_no_relocating_shards": "true"
+      }
     }
