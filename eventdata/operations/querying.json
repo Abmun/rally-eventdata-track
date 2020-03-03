@@ -223,7 +223,7 @@
   "name": "current-kibana-discover_60m",
   "operation-type": "kibana",
   "param-source": "elasticlogs_kibana",
-  "debug": {{p_verbose}},
+  "debug": false,
   "dashboard": "discover",
   "index_pattern": "apm-*",
   "query_string": ["*"],
