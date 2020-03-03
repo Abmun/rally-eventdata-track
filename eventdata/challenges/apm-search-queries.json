@@ -43,8 +43,8 @@
             "target-interval": 15
           },
           {
-            "operation": "current-kibana-discover_60m",
-            "target-interval": 30
+            "operation": "current-kibana-discover_120m",
+            "target-interval": 60
           },
           {
             "operation": "query-transactiontype-timewindow",
