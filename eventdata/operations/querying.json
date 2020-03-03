@@ -220,7 +220,7 @@
       }
     },
 {
-  "name": "current-kibana-discover_60m",
+  "name": "current-kibana-discover_120m",
   "operation-type": "kibana",
   "param-source": "elasticlogs_kibana",
   "debug": false,
