@@ -12,34 +12,38 @@
       "parallel": {
         "warmup-time-period": 0,
         "time-period": {{ p_query_time_period }},
-        "clients": 6,
+        "clients": 8,
         "tasks": [
           {
-            "operation": "query-transactions-with-time",
-            "target-interval": 90
+            "operation": "search-services-1h",
+            "target-interval": 30
           },
             {
-            "operation": "query-all-spans",
-            "target-interval": 90
+            "operation": "search-bizxcfweb-transactions-pageload-1h",
+            "target-interval": 30
           },
             {
-            "operation": "query-spans-no-time",
+            "operation": "search-bizxcfweb-spans-1h",
+            "target-interval": 30
+          },
+            {
+            "operation": "search-spandetails-1h",
+            "target-interval": 30
+          },
+          {
+            "operation": "search-services-24h",
             "target-interval": 60
           },
-            {
-            "operation": "query-spans-with-time",
-            "target-interval": 15
+          {
+            "operation": "search-bizxcfweb-transactions-pageload-24h",
+            "target-interval": 60
           },
           {
-            "operation": "query-spans-by-service-timewindow",
-            "target-interval": 15
+            "operation": "search-bizxcfweb-spans-24h",
+            "target-interval": 60
           },
           {
-            "operation": "query-error-timewindow",
-            "target-interval": 15
-          },
-          {
-            "operation": "query-transactiontype-timewindow",
+            "operation": "search-spandetails-24h",
             "target-interval": 60
           }
         ]
