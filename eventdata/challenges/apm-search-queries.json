@@ -16,15 +16,15 @@
         "tasks": [
           {
             "operation": "query-transactions-with-time",
-            "target-interval": 30
+            "target-interval": 90
           },
             {
             "operation": "query-all-spans",
-            "target-interval": 15
+            "target-interval": 90
           },
             {
             "operation": "query-spans-no-time",
-            "target-interval": 30
+            "target-interval": 60
           },
             {
             "operation": "query-spans-with-time",
@@ -36,15 +36,11 @@
           },
           {
             "operation": "query-error-timewindow",
-            "target-interval": 30
-          },
-          {
-            "operation": "current-kibana-transactions-discover_120m",
-            "target-interval": 60
+            "target-interval": 15
           },
           {
             "operation": "query-transactiontype-timewindow",
-            "target-interval": 15
+            "target-interval": 60
           }
         ]
       }
