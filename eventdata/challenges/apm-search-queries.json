@@ -12,7 +12,7 @@
       "parallel": {
         "warmup-time-period": 0,
         "time-period": {{ p_query_time_period }},
-        "clients": 8,
+        "clients": 7,
         "tasks": [
           {
             "operation": "query-transactions-with-time",
