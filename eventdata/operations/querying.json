@@ -271,4 +271,151 @@
         "wait_for_status": "{{cluster_health | default('yellow')}}",
         "wait_for_no_relocating_shards": "true"
       }
+    },
+{
+      "name": "search-services-24h",
+      "operation-type": "search",
+      "index": "apm-*",
+      "body": {
+        "size": 500,
+        "query": {
+            "bool": {
+                "filter": [
+                    {
+                        "term": {
+                            "processor.event": "transaction"
+                        }
+                    },
+                    {
+                        "range": {
+                            "@timestamp": {
+                                "gte": "now-1d/d",
+                                "lte": "now/d",
+                                "format": "epoch_millis"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "aggs": {
+            "types": {
+                "terms": {
+                    "field": "service.name",
+                    "size": 100
+                }
+            }
+        }
+      }
+    },
+{
+      "name": "search-bizxcfweb-transactions-pageload-24h",
+      "operation-type": "search",
+      "index": "apm-*",
+      "body": {
+        "size": 500,
+        "query": {
+            "bool": {
+                "filter": [
+                    {
+                        "term": {
+                            "processor.event": "transaction"
+                        }
+                    },
+                    {
+                        "term": {
+                            "transaction.type": "page-load"
+                        }
+                    },
+                    {
+                        "term": {
+                            "service.name": "bizx-cf-web"
+                        }
+                    },
+                    {
+                        "range": {
+                            "@timestamp": {
+                                "gte": "now-1d/d",
+                                "lte": "now/d",
+                                "format": "epoch_millis"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "sort": [
+            {
+                "transaction.duration.us": {
+                    "order": "desc"
+                }
+            }
+        ],
+        "aggs": {
+            "types": {
+                "terms": {
+                    "field": "transaction.name",
+                    "size": 100
+                }
+            }
+        }
+      }
+    },
+{
+      "name": "search-bizxcfweb-transactions-pageload-24h",
+      "operation-type": "search",
+      "index": "apm-*",
+      "body": {
+        "size": 500,
+        "query": {
+            "bool": {
+                "filter": [
+                    {
+                        "term": {
+                            "processor.event": "transaction"
+                        }
+                    },
+                    {
+                        "term": {
+                            "transaction.type": "page-load"
+                        }
+                    },
+                    {
+                        "term": {
+                            "service.name": "bizx-cf-web"
+                        }
+                    },
+                    {
+                        "term": {
+                            "transaction.name": "HOME_TAB-HOME_TAB-HOME_V3"
+                        }
+                    },
+                    {
+                        "range": {
+                            "@timestamp": {
+                                "gte": "now-1d/d",
+                                "lte": "now/d",
+                                "format": "epoch_millis"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "sort": [
+            {
+                "transaction.duration.us": {
+                    "order": "desc"
+                }
+            }
+        ],
+        "aggs": {
+            "types": {
+                "terms": {
+                    "field": "transaction.name",
+                    "size": 100
+                }
+            }
+        }
+      }
     }
