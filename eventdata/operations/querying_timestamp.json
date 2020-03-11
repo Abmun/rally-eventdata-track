@@ -69,9 +69,8 @@
                     {
                         "range": {
                             "@timestamp": {
-                                "gte": "now-1d/d",
-                                "lte": "now/d",
-                                "format": "epoch_millis"
+                                "gte": "2020-02-21T00:00:49.682Z",
+                                "lte": "2020-02-22T00:00:49.682Z"
                             }
                         }
                     }
@@ -122,9 +121,8 @@
                     {
                         "range": {
                             "@timestamp": {
-                                "gte": "now-1d/d",
-                                "lte": "now/d",
-                                "format": "epoch_millis"
+                                "gte": "2020-02-21T00:00:49.682Z",
+                                "lte": "2020-02-22T00:00:49.682Z"
                             }
                         }
                     }
@@ -170,9 +168,8 @@
                     {
                         "range": {
                             "@timestamp": {
-                                "gte": "now-1d/d",
-                                "lte": "now/d",
-                                "format": "epoch_millis"
+                                "gte": "2020-02-21T00:00:49.682Z",
+                                "lte": "2020-02-22T00:00:49.682Z"
                             }
                         }
                     }
@@ -198,8 +195,8 @@
                     {
                         "range": {
                             "@timestamp": {
-                                "gte": "now-1h",
-                                "lte": "now"
+                                "gte": "2020-03-06T00:00:54.785Z",
+                                "lte": "2020-03-06T01:00:59.978Z"
                             }
                         }
                     }
@@ -243,8 +240,8 @@
                     {
                         "range": {
                             "@timestamp": {
-                                "gte": "now-1h",
-                                "lte": "now"
+                                "gte": "2020-03-06T00:00:54.785Z",
+                                "lte": "2020-03-06T01:00:59.978Z"
                             }
                         }
                     }
@@ -295,8 +292,8 @@
                     {
                         "range": {
                             "@timestamp": {
-                                "gte": "now-1h",
-                                "lte": "now"
+                                "gte": "2020-03-06T00:00:54.785Z",
+                                "lte": "2020-03-06T01:00:59.978Z"
                             }
                         }
                     }
@@ -342,8 +339,8 @@
                     {
                         "range": {
                             "@timestamp": {
-                                "gte": "now-1h",
-                                "lte": "now"
+                                "gte": "2020-03-06T00:00:54.785Z",
+                                "lte": "2020-03-06T01:00:59.978Z"
                             }
                         }
                     }
