@@ -24,9 +24,8 @@
                     {
                         "range": {
                             "@timestamp": {
-                                "gte": "now-1d/d",
-                                "lte": "now/d",
-                                "format": "epoch_millis"
+                                "gte": "2020-02-21T00:00:49.682Z",
+                                "lte": "2020-02-22T00:00:49.682Z"
                             }
                         }
                     }
